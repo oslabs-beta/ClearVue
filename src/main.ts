@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
 
-const App = require('./App.vue');
+import App from './App.vue';
 
 createApp(App).mount('#app');
