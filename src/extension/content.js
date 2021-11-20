@@ -7,5 +7,4 @@ script.src = chrome.runtime.getURL('backend/script.js');
 
 if (document.doctype) {
   document.documentElement.appendChild(script);
-  script.remove();
 }
