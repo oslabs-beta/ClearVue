@@ -1,14 +1,14 @@
-chrome.devtools.panels.create('Vue Toolkit', null, 'panel.html');
-let vueDetected = false;
+let backgroundPageConnection = chrome.runtime.connect({
+  name: "devtools-page"
+});
 
 chrome.devtools.inspectedWindow.eval(
   '!!(window.__VUE__)',
   (result, isException) => {
-    console.log(result);
-    vueDetected = result;
+    console.log('Vue3 detected in devtool: ', result);
+    if (result) {
+      chrome.devtools.panels.create('Vue Toolkit', null, 'panel.html');
+      chrome.storage.sync.set({ vueDetected: true });
+    }
   },
 );
-
-if (vueDetected) {
-  console.log('inside if');
-}
