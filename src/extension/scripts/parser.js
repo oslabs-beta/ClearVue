@@ -23,26 +23,6 @@ for (const candidate of candidates) {
   }
 }
 
-// Helper function to parse children & dynamicChildren arrays
-const parseChildren = (childrenArray) => {
-  const parsedChildNode = [];
-  childrenArray.forEach((childNode) => {
-    const singleChildObject = {};
-    for (const property in childNode) {
-      if (property === 'children' && Array.isArray(childNode[property])) singleChildObject.children = parseChildren(childNode[property]);
-      else if (property === 'component' && childNode[property]) singleChildObject.component = parseSubTree(childNode[property].subTree);
-      else if (property === 'dynamicChildren' && Array.isArray(childNode[property])) singleChildObject.dynamicChildren = parseChildren(childNode[property]);
-      else if (property === 'dynamicProps' && childNode[property]) singleChildObject.dynamicProps = childNode[property];
-      else if (property === 'el' && childNode[property]) singleChildObject.el = childNode[property];
-      else if (property === 'props' && childNode[property]) singleChildObject.props = childNode[property];
-      else if (property === 'type' && childNode[property]) singleChildObject.type = childNode[property];
-      else if (property === 'uid') singleChildObject.uid = childNode[property];
-    }
-    parsedChildNode.push(singleChildObject);
-  });
-  return parsedChildNode;
-};
-
 // Helper function to parse subTree array of properties (present in root level ._instance & component nodes)
 const parseSubTree = (subTreeObj) => {
   const parsedTree = {};
@@ -64,6 +44,25 @@ const parseSubTree = (subTreeObj) => {
   return parsedTree;
 };
 
+// Helper function to parse children & dynamicChildren arrays
+const parseChildren = (childrenArray) => {
+  const parsedChildNode = [];
+  childrenArray.forEach((childNode) => {
+    const singleChildObject = {};
+    for (const property in childNode) {
+      if (property === 'children' && Array.isArray(childNode[property])) singleChildObject.children = parseChildren(childNode[property]);
+      else if (property === 'component' && childNode[property]) singleChildObject.component = parseSubTree(childNode[property].subTree);
+      else if (property === 'dynamicChildren' && Array.isArray(childNode[property])) singleChildObject.dynamicChildren = parseChildren(childNode[property]);
+      else if (property === 'dynamicProps' && childNode[property]) singleChildObject.dynamicProps = childNode[property];
+      else if (property === 'el' && childNode[property]) singleChildObject.el = childNode[property];
+      else if (property === 'props' && childNode[property]) singleChildObject.props = childNode[property];
+      else if (property === 'type' && childNode[property]) singleChildObject.type = childNode[property];
+      else if (property === 'uid') singleChildObject.uid = childNode[property];
+    }
+    parsedChildNode.push(singleChildObject);
+  });
+  return parsedChildNode;
+};
 
 // create subTree to begin storing DOM nodes and relevant data
 const subTree = [];
