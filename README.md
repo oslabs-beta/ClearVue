@@ -1,4 +1,4 @@
-# vuetoolkit
+# VueToolkit
 
 ## Project setup
 ```
