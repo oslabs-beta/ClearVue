@@ -1,9 +1,15 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import ClientApp from '../views/ClientApp.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'ClientApp',
+    component: ClientApp,
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
   },
