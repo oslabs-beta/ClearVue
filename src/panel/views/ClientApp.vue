@@ -5,7 +5,9 @@
       <div class="container-fluid">
         <div>Render D3 Tree here</div>
       </div>
-      <Tree />
+      <!-- <Tree /> -->
+      <!-- <vertical-tree></vertical-tree> -->
+      <vert-collapsible-tree></vert-collapsible-tree>
     </div>
     <div class="col">
       Right Column
@@ -20,12 +22,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Tree from '../components/Tree.vue';
+// import Tree from '../components/Tree.vue';
+// import VerticalTree from '../components/VerticalTree.vue';
+import VertCollapsibleTree from '../components/VertCollapsibleTree.vue';
 
 export default defineComponent({
   name: 'ClientApp',
   components: {
-    Tree,
+    // Tree,
+    // VerticalTree,
+    VertCollapsibleTree,
   },
 });
 </script>

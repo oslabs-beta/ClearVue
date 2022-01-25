@@ -16,6 +16,9 @@ import * as d3 from 'd3';
 export default defineComponent({
   name: 'Tree',
   mounted() {
+
+    // 1. Access Data
+
     const treeData = {
       name: 'root',
       children: [
@@ -31,14 +34,40 @@ export default defineComponent({
       ],
     };
 
-    const margin = ({
-      top: 10, right: 120, bottom: 10, left: 40,
-    });
-    const width = 960 - margin.right - margin.left;
-    const height = 500 - margin.top - margin.bottom;
+    // 2. Create chart dimensions
+
+    const dimensions = {
+      width: window.innerwidth * 0.9,
+      height: window.innerHeight * 0.9,
+      margin: {
+        top: 15,
+        right: 15,
+        bottom: 40,
+        left: 60,
+      },
+    };
+
+    dimensions.boundedWidth = dimensions.width
+      - dimensions.margin.left
+      - dimensions.margin.right;
+    dimensions.boundedHeight = dimensions.height
+      - dimensions.margin.top
+      - dimensions.margin.bottom;
+
+    // 3. Draw Canvas/Create Tree Structure
+
+    const tree = d3.layout.tree()
+      .size([dimensions.height, dimensions.width]);
+
+
+    // const margin = ({
+    //   top: 10, right: 120, bottom: 10, left: 40,
+    // });
+    // const width = 960 - margin.right - margin.left;
+    // const height = 500 - margin.top - margin.bottom;
 
     const dx = 10;
-    const dy = width / 6;
+    const dy = dimensions.boundedWidth / 6;
     const tree = d3.tree().nodeSize([dx, dy]);
 
     const diagonal = d3.linkHorizontal().x((d) => d.y).y((d) => d.x);
@@ -54,7 +83,7 @@ export default defineComponent({
     });
 
     const svg = d3.select('svg')
-      .attr('viewBox', [-margin.left, -margin.top, width, dx])
+      .attr('viewBox', [500, 100, dimensions.boundedWidth, dx])
       .style('font', '10px sans-serif')
       .style('user-select', 'none');
 
@@ -87,7 +116,7 @@ export default defineComponent({
 
       const transition = svg.transition()
         .duration(duration)
-        .attr('viewBox', [-margin.left, left.x - margin.top, width, height])
+        .attr('viewBox', [-margin.left, left.x - margin.top, dimensions.boundedWidth, height])
         .tween('resize', window.ResizeObserver ? null : () => () => svg.dispatch('toggle'));
 
       // Update the nodes…

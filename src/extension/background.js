@@ -1,7 +1,7 @@
 // Background script is running in the background of the chrome browser listening
 // and handling events triggerd. Our background script will mostly listen for events
 // coming from the devtool extension as well as those from the inspected window.
-console.log('Hello from Background Service Worker');
+// console.log('Hello from Background Service Worker');
 
 const ports = [];
 
