@@ -12,9 +12,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <router-link class="nav-link" to="/">App</router-link>
-      <router-link class="nav-link" to="/home">Home</router-link>
-      <router-link class="nav-link" to="/about">About</router-link>
+      <router-link class="nav-link" to="/">Tree</router-link>
+      <router-link class="nav-link" to="/circle-pack">Circle Pack</router-link>
+      <router-link class="nav-link" to="/home">Other</router-link>
     </div>
   </div>
 </nav>

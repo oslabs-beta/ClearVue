@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
-import ClientApp from '../views/ClientApp.vue';
+import TreeViz from '../views/TreeViz.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'ClientApp',
-    component: ClientApp,
+    name: 'TreeViz',
+    component: TreeViz,
   },
   {
     path: '/home',
@@ -14,12 +14,12 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/circle-pack',
+    name: 'CirclePack',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/CirclePack.vue'),
   },
 ];
 
