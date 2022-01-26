@@ -3,7 +3,7 @@
 // coming from the devtool extension as well as those from the inspected window.
 // console.log('Hello from Background Service Worker');
 
-const ports = [];
+const ports = {};
 
 // Listener for receiving message from content script (inspected window)
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -30,16 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     case 'parseTree':
       // if the message we receive from content script asks us to parse dom tree
       console.log('run script for parsing and processing tree');
-      chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: () => {
-          const script = document.createElement('script');
-          script.src = chrome.runtime.getURL('scripts/parser.js');
-          if (document.doctype) {
-            document.documentElement.appendChild(script);
-          }
-        },
-      });
+
       break;
     case 'updateDevtool':
       // if the message we receive asks us to update the devtool with received data
@@ -57,17 +48,28 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 // Listener for receiving message from devtool extension (devtool and panel)
 chrome.runtime.onConnect.addListener((port) => {
-  console.log('port is: ', port);
-  ports.push(port);
+  console.log('newly connected port: ', port);
+  // tabId is used stored as port.name, used to uniquely identify each port
+  const portId = parseInt(port.name)
+  port[portId] = port;
+
   port.onMessage.addListener((message) => {
     const { action, payload, tabId } = message;
     console.log('Received message from connected port: ', message);
-
+    
     switch (action) {
-      case 'initPanel':
-        console.log('sending data to panel');
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, { parser: true });
+      case 'parseTab':
+        console.log('injecting parser script to tab: ', tabId);
+        // chrome.tabs.sendMessage(tabId, { tabId, action });
+        chrome.scripting.executeScript({
+          target: { tabId },
+          function: () => {
+            const script = document.createElement('script');
+            script.src = chrome.runtime.getURL('scripts/parser.js');
+            if (document.doctype) {
+              document.documentElement.appendChild(script);
+            }
+          },
         });
         break;
       default:

@@ -11,35 +11,19 @@ export default defineComponent({
   components: {
     NavBar,
   },
-  data() {
-    return {
-      sample: 1,
-      testData: '',
-      tabId: -1,
-    };
-  },
   mounted() {
-    this.sample = this.$store.state.tabId;
     if (process.env.NODE_ENV === 'production') {
       console.log('production mode, loaded in extension');
       // run method for obtaining extension data
-      const { tabId } = chrome.devtools.inspectedWindow;
-      console.log('tabId obtained: ', tabId);
-      this.tabId = tabId;
+      this.$store.commit('initConnection');
+      const { tabId, port } = this.$store.state;
 
-      const port = chrome.runtime.connect();
-      port.postMessage({
-        action: 'initPanel',
-        tabId,
-        message: 'extension dispatch action to init devtool panel',
-      });
-      port.onMessage.addListener((msg) => {
-        console.log('port received msg:', msg);
-        this.testData = msg.data;
-      });
+      console.log('tabId obtained: ', tabId);
+      console.log('port obtained: ', port);
     } else {
       console.log('development mode, loaded in chrome');
       // run mock data to test in dev server
+      this.$store.commit('testLog', 'at App.vue');
     }
   },
 });
