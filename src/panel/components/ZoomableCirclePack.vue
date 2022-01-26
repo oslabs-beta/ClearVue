@@ -16,6 +16,7 @@ import * as flareData from '../assets/flare-2.json';
 
 export default {
   mounted() {
+    console.log('flareData is -->', flareData.default);
     const pack = (flareData) => d3.pack()
       .size([width, height])
       .padding(3)(d3.hierarchy(flareData)
@@ -31,11 +32,11 @@ export default {
       .interpolate(d3.interpolateHcl);
 
     const createChart = () => {
-      const root = pack(flareData);
+      const root = pack(flareData.default);
       let focus = root;
       let view;
 
-      const svg = d3.create('svg')
+      const svg = d3.select('#zoom-circle-pack')
         .attr('viewBox', `-${width / 2} -${height / 2} ${width} ${height}`)
         .style('display', 'block')
         .style('margin', '0 -14px')
@@ -71,7 +72,7 @@ export default {
 
         view = v;
 
-        label.attr('transform', (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+        // label.attr('transform', (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
         node.attr('transform', (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
         node.attr('r', (d) => d.r * k);
       }
@@ -98,9 +99,7 @@ export default {
 
       return svg.node();
     };
-    const chart = createChart();
-    d3.select('zoom-circle-pack')
-      .append(chart);
+    createChart();
   },
 };
 </script>
