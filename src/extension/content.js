@@ -2,7 +2,7 @@
 // By using the standard Document Object Model (DOM), they are able to read details of
 // the web pages the browser visits, make changes to them, and pass information to their
 // parent extension. Our content scripts set up message passing wit extension background script.
-console.log('Hello from Content Script');
+// console.log('Hello from Content Script');
 
 // event listener for window in context of target web page (inspected window)
 // event listener waiting for a message to be passed back from 'backend/detector.js'
