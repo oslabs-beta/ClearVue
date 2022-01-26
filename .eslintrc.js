@@ -3,6 +3,9 @@ module.exports = {
   env: {
     node: true,
   },
+  globals: {
+    chrome: true
+  },
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/airbnb',
