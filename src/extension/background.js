@@ -60,18 +60,16 @@ chrome.runtime.onConnect.addListener((port) => {
   console.log('port is: ', port);
   ports.push(port);
   port.onMessage.addListener((message) => {
-    const { action, payload } = message;
+    const { action, payload, tabId } = message;
     console.log('Received message from connected port: ', message);
 
     switch (action) {
       case 'initPanel':
         console.log('sending data to panel');
-        port.postMessage({
-          action: 'initPanel',
-          data: 'tree data placeholder',
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.tabs.sendMessage(tabs[0].id, { parser: true });
         });
         break;
-
       default:
         console.log('default case: nonspecified action');
     }
