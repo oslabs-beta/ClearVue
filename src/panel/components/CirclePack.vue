@@ -45,7 +45,7 @@ export default {
         stroke = '#bbb', // stroke for internal circles
         strokeWidth, // stroke width for internal circles
         strokeOpacity, // stroke opacity for internal circles
-      } = {},
+      } = {}
     ) {
       // If id and parentId options are specified, or the path option, use d3.stratify
       // to convert tabular data to a hierarchy; otherwise we assume that the data is
@@ -55,8 +55,8 @@ export default {
         path != null
           ? d3.stratify().path(path)(data)
           : id != null || parentId != null
-            ? d3.stratify().id(id).parentId(parentId)(data)
-            : d3.hierarchy(data, children);
+          ? d3.stratify().id(id).parentId(parentId)(data)
+          : d3.hierarchy(data, children);
 
       // Compute the values of internal nodes by aggregating from the leaves.
       value == null ? root.count() : root.sum((d) => Math.max(0, value(d)));
@@ -128,17 +128,14 @@ export default {
           .attr('y', (d, i, D) => `${i - D.length / 2 + 0.85}em`)
           .attr('fill-opacity', (d, i, D) => (i === D.length - 1 ? 0.7 : null))
           .text((d) => d);
-      }
 
-      return svg.node();
+        return svg.node();
     }
     // parse data from flare.json and pass to Pack()
-    const data = flare.json();
-    const chart = Pack(data);
+    const chart = Pack(flare);
 
     // append chart to svg node
-    d3.select('#circle-pack')
-      .append(chart);
+    d3.select('#circle-pack').append(chart);
   },
 };
 </script>

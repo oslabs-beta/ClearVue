@@ -3,7 +3,7 @@
   <div class="row gx-0">
     <div class="col">Left Column
       <div class="container-fluid">
-        <div>Render D3 Tree here</div>
+        <div>Render Tree here</div>
       </div>
       <vertical-tree></vertical-tree>
     </div>
