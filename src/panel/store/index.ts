@@ -4,26 +4,21 @@ export default createStore({
   state: {
     tabId: -1,
     port: {},
+    treeData: {},
+    testData: {},
   },
   mutations: {
-    initConnection(state) {
-      console.log('init connection');
+    initTab(state) {
+      console.log('init tabId');
       const { tabId } = chrome.devtools.inspectedWindow;
       state.tabId = tabId;
-
-      const port = chrome.runtime.connect({ name: `${tabId}` });
-      port.onMessage.addListener((msg) => {
-        console.log('port received msg:', msg);
-        this.testData = msg.data;
-      });
-
-      port.postMessage({
-        action: 'parseTab',
-        tabId,
-        message: 'extension dispatch action to parse target tab',
-      });
-
+    },
+    initPort(state, port) {
       state.port = port;
+    },
+    updateTree(state, payload) {
+      state.treeData = JSON.parse(payload);
+      console.log('vuex treeData updated: ', state.treeData);
     },
     testLog(state, str) {
       console.log('mutation invoked: ', str);

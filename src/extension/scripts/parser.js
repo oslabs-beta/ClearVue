@@ -89,3 +89,9 @@ roots.forEach((node) => {
 });
 
 console.log('this is the subTree array: ', subTree);
+
+window.postMessage({
+  type: 'clearVue',
+  action: 'updateTree',
+  payload: JSON.stringify(subTree),
+});

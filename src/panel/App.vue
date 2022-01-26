@@ -13,15 +13,37 @@ export default defineComponent({
   },
   mounted() {
     if (process.env.NODE_ENV === 'production') {
-      console.log('production mode, loaded in extension');
+      console.log('production mode, loaded in chrome extension');
       // run method for obtaining extension data
-      this.$store.commit('initConnection');
-      const { tabId, port } = this.$store.state;
+      this.$store.commit('initTab');
+      const { tabId } = this.$store.state;
+
+      const port = chrome.runtime.connect({ name: `${tabId}` });
+      port.onMessage.addListener((message) => {
+        console.log('port received message:', message);
+        const { action, payload } = message;
+
+        switch (action) {
+          case 'updateTree':
+            this.$store.commit('updateTree', payload);
+            break;
+          default:
+            console.log('received unspecified action on port: ');
+        }
+      });
+
+      port.postMessage({
+        action: 'parseTab',
+        tabId,
+        message: 'extension dispatch action to parse target tab',
+      });
+
+      this.$store.commit('initPort', port);
 
       console.log('tabId obtained: ', tabId);
       console.log('port obtained: ', port);
     } else {
-      console.log('development mode, loaded in chrome');
+      console.log('development mode, loaded in chrome browser tab');
       // run mock data to test in dev server
       this.$store.commit('testLog', 'at App.vue');
     }
