@@ -28,7 +28,7 @@
         "service_worker": "background.js"
     },
     "web_accessible_resources": [{
-        "resources": ["scripts/detector.js"],
+        "resources": ["scripts/detector.js", "scripts/parser.js"],
         "matches": ["<all_urls>"]
       }],
     "icons": {

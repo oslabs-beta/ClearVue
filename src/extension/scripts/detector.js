@@ -13,12 +13,4 @@ function detectVue(win) {
   return vueDetected;
 }
 
-const hasVue = detectVue(window);
-
-// post message allows communication between pages and popups and/or devtools
-// this message will send whether Vue3 was detected to 'content.js'
-window.postMessage({
-  type: 'ClearVue',
-  action: 'detectVue',
-  vueDetected: hasVue,
-});
+detectVue(window);
