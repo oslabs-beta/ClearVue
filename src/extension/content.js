@@ -7,7 +7,7 @@
 // event listener for window in context of target web page (inspected window)
 // event listener waiting for a message to be passed back from 'backend/detector.js'
 window.addEventListener('message', (e) => {
-  if (e.data.type == 'clearVue') {
+  if (e.data.type === 'clearVue') {
     console.log('received clearVue message on content script listener: ', e);
     const { action, payload } = e.data;
 

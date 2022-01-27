@@ -1,4 +1,4 @@
-# VueToolkit
+# ClearVue
 
 ## Project setup
 ```

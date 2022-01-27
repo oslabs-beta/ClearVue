@@ -13,4 +13,4 @@ function detectVue(win) {
   return vueDetected;
 }
 
-const hasVue = detectVue(window);
+detectVue(window);
