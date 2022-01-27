@@ -7,7 +7,7 @@
 // event listener for window in context of target web page (inspected window)
 // event listener waiting for a message to be passed back from 'backend/detector.js'
 window.addEventListener('message', (e) => {
-  if (e.type == 'VueToolkit') {
+  if (e.type == 'ClearVue') {
     console.log('Received message from injected: ', e);
   }
 });
