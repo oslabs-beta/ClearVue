@@ -1,5 +1,5 @@
 <template>
-  <nav-bar title="Vue Toolkit"></nav-bar>
+  <nav-bar title="ClearVue"></nav-bar>
 </template>
 
 <script>
