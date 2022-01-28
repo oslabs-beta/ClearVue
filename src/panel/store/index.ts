@@ -26,22 +26,34 @@ export default createStore({
   },
   getters: {
     getChartData(state) {
-      const processTree = (tree) => {
+      const deepCopy = (data: any) => JSON.parse(JSON.stringify(data));
+
+      const processTree = (tree: any) => {
+        if (!tree) {
+          return undefined;
+        }
+
         const {
-          name, props, data, children, component,
+          name, props, data, children, components,
         } = tree;
         const node = {
           name, props, data, children: [],
         };
 
-        if (children) {
-          for (let i = 0; i <= children.length; i++) {
-            node.children.push(processTree(children[i]));
-          }
+        if (typeof props === 'object') {
+          node.props = deepCopy(props);
         }
-        if (component) {
-          for (let i = 0; i <= component.children.length; i++) {
-            node.children.push(processTree(component.children[i]));
+        if (typeof data === 'object') {
+          node.data = deepCopy(data);
+        }
+
+        if (components) {
+          (node.children as any[]).push(processTree(components));
+        } else if (children) {
+          for (let i = 0; i <= children.length; i++) {
+            if (children[i]) {
+              (node.children as any[]).push(processTree(children[i]));
+            }
           }
         }
 
