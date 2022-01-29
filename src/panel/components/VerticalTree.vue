@@ -104,6 +104,17 @@ export default {
         .attr('r', 1e-6)
         .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
 
+      // Add rectangle instead of circle for the nodes
+      // nodeEnter.append('rect')
+      //   .attr('class', 'node')
+      //   .attr('width', (d) => ((d.data.name.length > 30) ? 50 : 100))
+      //   .attr('height', 40)
+      //   .attr('y', -11)
+      //   .attr('rx', 2)
+      //   .attr('ry', 2)
+      //   .attr('transform', () => `translate(${source.y0},${source.x0})`)
+      //   .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+
       // Add tooltip for nodes
       nodeEnter.append('scg:title')
         .text((d) => d.data.name);
