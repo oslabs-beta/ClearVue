@@ -37,7 +37,11 @@ export default createStore({
           name, props, data, children, components,
         } = tree;
         const node = {
-          name, props, data, children: [],
+          name,
+          props,
+          data,
+          children: [],
+          size: [100, 100],
         };
 
         if (typeof props === 'object') {
@@ -50,21 +54,29 @@ export default createStore({
         if (components) {
           (node.children as any[]).push(processTree(components));
         } else if (children) {
-          for (let i = 0; i <= children.length; i++) {
-            if (children[i]) {
-              (node.children as any[]).push(processTree(children[i]));
+          if (Array.isArray(children)) {
+            for (let i = 0; i <= children.length; i++) {
+              if (children[i]) {
+                (node.children as any[]).push(processTree(children[i]));
+              }
             }
+          } else if (children.components) {
+            (node.children as any[]).push(processTree(children.components));
           }
         }
 
         return node;
       };
 
-      return processTree(state.treeData);
+      return processTree(state.treeData[0]);
+    },
+    isDevMode(state) {
+      if ((process.env.NODE_ENV === 'production')) {
+        return false;
+      }
+      return true;
     },
   },
-  actions: {
-  },
-  modules: {
-  },
+  actions: {},
+  modules: {},
 });
