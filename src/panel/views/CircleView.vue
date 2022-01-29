@@ -1,21 +1,9 @@
 <template>
   <div class="container-fluid">
     <div class="row gx-0">
-      <div class="col">
-        Left Column
-        <div class="container-fluid">
-          <div>Render Circle Pack here</div>
-          <!-- <circle-pack></circle-pack> -->
-          <zoomable-circle-pack></zoomable-circle-pack>
-        </div>
-      </div>
-      <div class="col">
-        Right Column
-        <div class="container-fluid">
-          <div class="right-col-panels">Top Right Div</div>
-          <div class="right-col-panels">Bottom Right Div</div>
-        </div>
-      </div>
+      <div>Render Circle Pack here</div>
+      <!-- <circle-pack></circle-pack> -->
+      <zoomable-circle-pack></zoomable-circle-pack>
     </div>
   </div>
 </template>
