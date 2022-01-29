@@ -2,9 +2,9 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    tabId: -1,
+    tabId: 0,
     port: {},
-    treeData: {},
+    treeData: [],
     testData: {},
   },
   mutations: {
@@ -24,8 +24,59 @@ export default createStore({
       console.log('mutation invoked: ', str);
     },
   },
-  actions: {
+  getters: {
+    getChartData(state) {
+      const deepCopy = (data: any) => JSON.parse(JSON.stringify(data));
+
+      const processTree = (tree: any) => {
+        if (!tree) {
+          return undefined;
+        }
+
+        const {
+          name, props, data, children, components,
+        } = tree;
+        const node = {
+          name,
+          props,
+          data,
+          children: [],
+          size: [100, 100],
+        };
+
+        if (typeof props === 'object') {
+          node.props = deepCopy(props);
+        }
+        if (typeof data === 'object') {
+          node.data = deepCopy(data);
+        }
+
+        if (components) {
+          (node.children as any[]).push(processTree(components));
+        } else if (children) {
+          if (Array.isArray(children)) {
+            for (let i = 0; i <= children.length; i++) {
+              if (children[i]) {
+                (node.children as any[]).push(processTree(children[i]));
+              }
+            }
+          } else if (children.components) {
+            (node.children as any[]).push(processTree(children.components));
+          }
+        }
+
+        return node;
+      };
+
+      return processTree(state.treeData[0]);
+    },
+    isDevMode(state) {
+      if ((process.env.NODE_ENV === 'production')) {
+        return false;
+      }
+      return true;
+    },
   },
-  modules: {
-  },
+  actions: {},
+  modules: {},
 });
