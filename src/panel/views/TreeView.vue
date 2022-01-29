@@ -23,7 +23,7 @@ import { defineComponent } from 'vue';
 import VerticalTree from '../components/VerticalTree.vue';
 
 export default defineComponent({
-  name: 'TreeViz',
+  name: 'TreeView',
   components: {
     VerticalTree,
   },

@@ -58,20 +58,17 @@ export default {
     const root = d3.hierarchy(treeData, (d) => d.children);
 
     // Collapse after second level
-    // eslint-disable-next-line no-use-before-define
     root.children.forEach(collapse);
     root.x0 = 0;
     root.y0 = 0;
 
     const flexLayout = flextree.flextree();
 
-    // eslint-disable-next-line no-use-before-define
     update(root);
 
     // Collapse the node and all it's children
     function collapse(d) {
       if (d.children) {
-        // eslint-disable-next-line no-underscore-dangle
         d._children = d.children;
         d._children.forEach(collapse);
         d.children = null;
