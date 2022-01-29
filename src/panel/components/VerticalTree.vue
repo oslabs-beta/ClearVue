@@ -96,7 +96,8 @@ export default {
       const nodeEnter = node.enter().append('g')
         .attr('class', 'node')
         .attr('transform', (d) => `translate(${source.x0},${source.y0})`)
-        .on('dblclick', click);
+        .on('dblclick', click)
+        .on('mouseenter', displayName);
 
       // Add Circle for the nodes
       nodeEnter.append('circle')
@@ -216,6 +217,11 @@ export default {
           d._children = null;
         }
         update(d);
+      }
+
+      // display name on hover
+      function displayName(event, d) {
+        return console.log('name is displayed');
       }
     }
 
