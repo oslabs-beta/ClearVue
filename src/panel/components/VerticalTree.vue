@@ -96,14 +96,17 @@ export default {
       const nodeEnter = node.enter().append('g')
         .attr('class', 'node')
         .attr('transform', (d) => `translate(${source.x0},${source.y0})`)
-        .on('dblclick', click)
-        .on('mouseenter', displayName);
+        .on('dblclick', click);
 
       // Add Circle for the nodes
       nodeEnter.append('circle')
         .attr('class', 'node')
         .attr('r', 1e-6)
         .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+
+      // Add tooltip for nodes
+      nodeEnter.append('scg:title')
+        .text((d) => d.data.name);
 
       // Add labels for the nodes
       nodeEnter.append('text')
