@@ -1,49 +1,71 @@
 <template>
-  <svg id="vert-collapse-tree" width="500" height="500"></svg>
+  <svg id='vert-collapse-tree' width='500' height='500'></svg>
+  <div>{{ getChartData }}</div>
+  <div>{{ treeData }}</div>
 </template>
 
 <script>
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-shadow */
+/* eslint-disable no-inner-declarations */
+import { defineComponent } from 'vue';
 import * as d3 from 'd3';
 import * as flextree from 'd3-flextree';
 
-export default {
+export default defineComponent({
+  name: 'VerticalTree',
+  computed: {
+    getChartData() {
+      return this.$store.getters.getChartData;
+    },
+    treeData() {
+      return this.$store.state.treeData;
+    },
+  },
   mounted() {
-    const treeData = {
-      name: 'A',
-      size: [100, 100],
-      children: [
-        {
-          name: 'BA',
-          size: [100, 50],
-          children: [
-            { name: 'BAA', size: [100, 50] },
-            {
-              name: 'BAB',
-              size: [100, 50],
-              children: [
-                { name: 'BABA', size: [100, 50] },
-                { name: 'BABB', size: [100, 50] },
-              ],
-            },
-            { name: 'BAC', size: [200, 50] },
-          ],
-        },
-        {
-          name: 'BB',
-          size: [100, 75],
-          children: [
-            { name: 'BBA', size: [50, 50] },
-            { name: 'BBB', size: [50, 50] },
-          ],
-        },
-      ],
-    };
+    let treeData;
+
+    // populate treeData based on current mode
+    if (process.env.NODE_ENV === 'production') {
+      treeData = this.getChartData;
+    } else {
+      treeData = {
+        name: 'A',
+        size: [100, 100],
+        children: [
+          {
+            name: 'BA',
+            size: [100, 50],
+            children: [
+              { name: 'BAA', size: [100, 50] },
+              {
+                name: 'BAB',
+                size: [100, 50],
+                children: [
+                  { name: 'BABA', size: [100, 50] },
+                  { name: 'BABB', size: [100, 50] },
+                ],
+              },
+              { name: 'BAC', size: [200, 50] },
+            ],
+          },
+          {
+            name: 'BB',
+            size: [100, 75],
+            children: [
+              { name: 'BBA', size: [50, 50] },
+              { name: 'BBB', size: [50, 50] },
+            ],
+          },
+        ],
+      };
+    }
 
     const width = 960;
     const height = 500;
+
+    const flexLayout = flextree.flextree();
 
     // append the svg object to the body of the page
     const svg = d3.select('#vert-collapse-tree');
@@ -62,10 +84,6 @@ export default {
     root.x0 = 0;
     root.y0 = 0;
 
-    const flexLayout = flextree.flextree();
-
-    update(root);
-
     // Collapse the node and all it's children
     function collapse(d) {
       if (d.children) {
@@ -74,7 +92,6 @@ export default {
         d.children = null;
       }
     }
-
     function update(source) {
       // Assigns the x and y position for the nodes
       const treeData = flexLayout(root);
@@ -86,17 +103,19 @@ export default {
       // ****************** Nodes section ***************************
 
       // Update the nodes...
-      const node = g.selectAll('g.node')
-        .data(nodes, (d) => d.id || (d.id = ++i));
+      const node = g.selectAll('g.node').data(nodes, (d) => d.id || (d.id = ++i));
 
       // Enter any new modes at the parent's previous position.
-      const nodeEnter = node.enter().append('g')
+      const nodeEnter = node
+        .enter()
+        .append('g')
         .attr('class', 'node')
         .attr('transform', (d) => `translate(${source.x0},${source.y0})`)
         .on('dblclick', click);
 
       // Add Circle for the nodes
-      nodeEnter.append('circle')
+      nodeEnter
+        .append('circle')
         .attr('class', 'node')
         .attr('r', 1e-6)
         .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
@@ -117,21 +136,24 @@ export default {
         .text((d) => d.data.name);
 
       // Add labels for the nodes
-      nodeEnter.append('text')
+      nodeEnter
+        .append('text')
         .attr('pointer-events', 'none')
         .attr('dy', '0.35em')
         .text((d) => d.data.name)
         .attr('text-anchor', 'middle');
 
       // UPDATE
-      const nodeUpdate = nodeEnter.merge(node)
+      const nodeUpdate = nodeEnter
+        .merge(node)
         .attr('fill', '#fff')
         .attr('stroke', 'steelblue')
         .attr('stroke-width', '3px;')
         .style('font', '12px sans-serif');
 
       // Transition to the proper position for the node
-      nodeUpdate.transition()
+      nodeUpdate
+        .transition()
         .duration(duration)
         .attr('transform', function (event, i, arr) {
           const d = d3.select(this).datum();
@@ -139,13 +161,16 @@ export default {
         });
 
       // Update the node attributes and style
-      nodeUpdate.select('circle.node')
+      nodeUpdate
+        .select('circle.node')
         .attr('r', 20)
         .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'))
         .attr('cursor', 'pointer');
 
       // Remove any exiting nodes
-      const nodeExit = node.exit().transition()
+      const nodeExit = node
+        .exit()
+        .transition()
         .duration(duration)
         .attr('transform', function (event, _i, arr) {
           const d = d3.select(this).datum();
@@ -154,21 +179,20 @@ export default {
         .remove();
 
       // On exit reduce the node circles size to 0
-      nodeExit.select('circle')
-        .attr('r', 1e-6);
+      nodeExit.select('circle').attr('r', 1e-6);
 
       // On exit reduce the opacity of text labels
-      nodeExit.select('text')
-        .style('fill-opacity', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
 
       // ****************** links section ***************************
 
       // Update the links...
-      const link = g.selectAll('path.link')
-        .data(links, (d) => d.id);
+      const link = g.selectAll('path.link').data(links, (d) => d.id);
 
       // Enter any new links at the parent's previous position.
-      const linkEnter = link.enter().insert('path', 'g')
+      const linkEnter = link
+        .enter()
+        .insert('path', 'g')
         .attr('class', 'link')
         .attr('d', (d) => {
           const o = {
@@ -179,18 +203,22 @@ export default {
         });
 
       // UPDATE
-      const linkUpdate = linkEnter.merge(link)
+      const linkUpdate = linkEnter
+        .merge(link)
         .attr('fill', 'none')
         .attr('stroke', '#ccc')
         .attr('stroke-width', '2px');
 
       // Transition back to the parent element position
-      linkUpdate.transition()
+      linkUpdate
+        .transition()
         .duration(duration)
         .attr('d', (d) => diagonal(d, d.parent));
 
       // Remove any exiting links
-      const linkExit = link.exit().transition()
+      const linkExit = link
+        .exit()
+        .transition()
         .duration(duration)
         .attr('d', function (event, i, arr) {
           const d = d3.select(this).datum();
@@ -235,8 +263,8 @@ export default {
         return console.log('name is displayed');
       }
     }
-
-    return svg.node();
+    // eslint-disable-next-line no-use-before-define
+    update(root);
   },
-};
+});
 </script>

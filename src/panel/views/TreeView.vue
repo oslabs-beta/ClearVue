@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div>Render Tree here</div>
       </div>
-      <vertical-tree></vertical-tree>
+      <vertical-tree v-if="($store.state.treeData.length !== 0) || isDevMode"></vertical-tree>
     </div>
     <div class="col">
       Right Column
@@ -26,6 +26,11 @@ export default defineComponent({
   name: 'TreeView',
   components: {
     VerticalTree,
+  },
+  computed: {
+    isDevMode() {
+      return this.$store.getters.isDevMode;
+    },
   },
 });
 </script>
