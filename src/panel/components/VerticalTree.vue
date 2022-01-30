@@ -120,7 +120,7 @@ export default defineComponent({
         .append('circle')
         .attr('class', 'node')
         .attr('r', 1e-6)
-        .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
 
       // Add rectangle instead of circle for the nodes
       // nodeEnter.append('rect')
@@ -148,8 +148,8 @@ export default defineComponent({
       // UPDATE
       const nodeUpdate = nodeEnter
         .merge(node)
-        .attr('fill', '#fff')
-        .attr('stroke', 'steelblue')
+        .attr('fill', '#42b883')
+        .attr('stroke', '#35495e')
         .attr('stroke-width', '3px;')
         .style('font', '12px sans-serif');
 
@@ -166,7 +166,7 @@ export default defineComponent({
       nodeUpdate
         .select('circle.node')
         .attr('r', 20)
-        .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'))
+        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'))
         .attr('cursor', 'pointer');
 
       // Remove any exiting nodes
@@ -258,11 +258,6 @@ export default defineComponent({
           d._children = null;
         }
         update(d);
-      }
-
-      // display name on hover
-      function displayName(event, d) {
-        return console.log('name is displayed');
       }
     }
     // eslint-disable-next-line no-use-before-define
