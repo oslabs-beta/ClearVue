@@ -7,9 +7,10 @@
   </div>
   <div>
     <div class="row">
-      <div class="col">Bottom Left Div
-        <!-- add accordians -->
-        <div class="accordion" id="accordionExample">
+      <div class="col">Bottom Row Div
+        <!-- add accordions -->
+        <div class="accordion" id="accordionDisplay">
+          <!-- accordion item for props -->
           <div class="accordion-item">
             <h2 class="accordion-header"
                 id="headingOne">
@@ -22,18 +23,39 @@
                 Props
               </button>
             </h2>
-            <div id="collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
+            <div  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionEx">
               <div class="accordion-body">
                 props from parsed data goes here
               </div>
             </div>
           </div>
+            <!-- accordion item for data -->
+          <div class="accordion-item">
+            <h2 class="accordion-header"
+                id="headingTwo">
+              <button class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo">
+                Data
+              </button>
+            </h2>
+            <div  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionEx">
+              <div class="accordion-body">
+                other data from selected node goes here
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col">Bottom Right Div</div>
     </div>
   </div>
 </div>
