@@ -1,18 +1,39 @@
 <template>
 <div class="container-fluid">
-  <div class="row gx-0">
-    <div class="col">Left Column
-      <div class="container-fluid">
-        <div>Render Tree here</div>
-      </div>
-      <vertical-tree v-if="($store.state.treeData.length !== 0) || isDevMode"></vertical-tree>
+  <div class="row">
+    <div class="container-fluid">
     </div>
-    <div class="col">
-      Right Column
-      <div class="container-fluid">
-        <div class="right-col-panels">Top Right Div</div>
-        <div class="right-col-panels">Bottom Right Div</div>
+    <vertical-tree v-if="($store.state.treeData.length !== 0) || isDevMode"></vertical-tree>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col">Bottom Left Div
+        <!-- add accordians -->
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header"
+                id="headingOne">
+              <button class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="false"
+                      aria-controls="collapseOne">
+                Props
+              </button>
+            </h2>
+            <div id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                props from parsed data goes here
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="col">Bottom Right Div</div>
     </div>
   </div>
 </div>
@@ -36,11 +57,12 @@ export default defineComponent({
 </script>
 
 <style>
-  .col, .right-col-panels {
-    border-style:ridge
-    /* border-width:5px */
+  .col {
+    min-height: 200px;
+    border-style: ridge
   }
-  .right-col-panels {
-    min-height: 150px
-  }
+  .dark-mode {
+  background-color: black;
+  color: #42b883;
+}
 </style>
