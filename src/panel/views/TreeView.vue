@@ -6,8 +6,8 @@
     <vertical-tree v-if="($store.state.treeData.length !== 0) || isDevMode"></vertical-tree>
   </div>
   <div>
-    <div class="row">
-      <div class="col">Bottom Row Div
+    <div class="row" id="bottom-row-display">
+      <div class="col gy-5">
         <!-- add accordions -->
         <div class="accordion" id="accordionDisplay">
           <!-- accordion item for props -->
@@ -79,12 +79,8 @@ export default defineComponent({
 </script>
 
 <style>
-  .col {
+  #bottom-row-display {
     min-height: 200px;
     border-style: ridge
   }
-  .dark-mode {
-  background-color: black;
-  color: #42b883;
-}
 </style>
