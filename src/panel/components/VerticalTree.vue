@@ -1,5 +1,7 @@
 <template>
-  <svg id='vert-collapse-tree' width='500' height='500'></svg>
+  <div class='svg-container'>
+    <svg id='vert-collapse-tree'></svg>
+  </div>
   <div>{{ getChartData }}</div>
   <div>{{ treeData }}</div>
 </template>
@@ -62,8 +64,8 @@ export default defineComponent({
       };
     }
 
-    const width = 960;
-    const height = 500;
+    const width = 600;
+    const height = 400;
 
     const flexLayout = flextree.flextree();
 
