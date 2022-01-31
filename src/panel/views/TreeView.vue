@@ -7,7 +7,7 @@
   </div>
   <div>
     <div class="row" id="bottom-row-display">
-      <div class="col gy-5">
+      <div class="col gy-4">
         <!-- add accordions -->
         <div class="accordion" id="accordionDisplay">
           <!-- accordion item for props -->
@@ -80,7 +80,7 @@ export default defineComponent({
 
 <style>
   #bottom-row-display {
-    min-height: 200px;
+    min-height: 160px;
     border-style: ridge
   }
 
