@@ -55,7 +55,7 @@ export default {
         .on('click', (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
       const label = svg.append('g')
-        .style('font', '10px sans-serif')
+        .style('font', '20px sans-serif')
         .attr('pointer-events', 'none')
         .attr('text-anchor', 'middle')
         .selectAll('text')
