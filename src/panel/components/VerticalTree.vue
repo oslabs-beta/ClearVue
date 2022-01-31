@@ -46,18 +46,26 @@ export default defineComponent({
                 size: [100, 50],
                 children: [
                   { name: 'BABA', size: [100, 50] },
-                  { name: 'BABB', size: [100, 50] },
+                  {
+                    name: 'BABB',
+                    size: [100, 50],
+                    children: [
+                      { name: 'BABBA', size: [100, 50] },
+                    ],
+                  },
+                  { name: 'BABC', size: [100, 50] },
                 ],
               },
-              { name: 'BAC', size: [200, 50] },
+              { name: 'BAC', size: [100, 50] },
             ],
           },
           {
             name: 'BB',
             size: [100, 75],
             children: [
-              { name: 'BBA', size: [50, 50] },
-              { name: 'BBB', size: [50, 50] },
+              { name: 'BBA', size: [100, 50] },
+              { name: 'BBB', size: [100, 50] },
+              { name: 'BBC', size: [100, 50] },
             ],
           },
         ],
@@ -129,12 +137,12 @@ export default defineComponent({
       const rectHeight = 30;
       nodeEnter.append('rect')
         .attr('class', 'node')
-        .attr('width', (d) => rectWidth = (d.data.name.length > 30) ? 85 : 65)
+        .attr('width', (d) => rectWidth = (d.data.name.length > 6) ? 85 : 65)
         .attr('height', rectHeight)
         .attr('x', -(rectWidth / 2))
         .attr('y', -(rectHeight / 2))
-        .attr('rx', 2)
-        .attr('ry', 2)
+        .attr('rx', 5)
+        .attr('ry', 5)
         // .translate(1, 1)
         .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
 
