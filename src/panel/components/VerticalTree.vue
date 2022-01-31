@@ -1,5 +1,7 @@
 <template>
-  <svg id='vert-collapse-tree' width='500' height='500'></svg>
+  <div class='svg-container'>
+    <svg id='vert-collapse-tree'></svg>
+  </div>
   <div>{{ getChartData }}</div>
   <div>{{ treeData }}</div>
 </template>
@@ -62,8 +64,8 @@ export default defineComponent({
       };
     }
 
-    const width = 960;
-    const height = 500;
+    const width = 600;
+    const height = 400;
 
     const flexLayout = flextree.flextree();
 
@@ -80,7 +82,6 @@ export default defineComponent({
     const root = d3.hierarchy(treeData, (d) => d.children);
 
     // Collapse after second level
-    // eslint-disable-next-line no-use-before-define
     root.children.forEach(collapse);
     root.x0 = 0;
     root.y0 = 0;
@@ -88,7 +89,6 @@ export default defineComponent({
     // Collapse the node and all it's children
     function collapse(d) {
       if (d.children) {
-        // eslint-disable-next-line no-underscore-dangle
         d._children = d.children;
         d._children.forEach(collapse);
         d.children = null;
@@ -120,7 +120,22 @@ export default defineComponent({
         .append('circle')
         .attr('class', 'node')
         .attr('r', 1e-6)
-        .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
+
+      // Add rectangle instead of circle for the nodes
+      // nodeEnter.append('rect')
+      //   .attr('class', 'node')
+      //   .attr('width', (d) => ((d.data.name.length > 30) ? 50 : 100))
+      //   .attr('height', 40)
+      //   .attr('y', -11)
+      //   .attr('rx', 2)
+      //   .attr('ry', 2)
+      //   .attr('transform', () => `translate(${source.y0},${source.x0})`)
+      //   .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+
+      // Add tooltip for nodes
+      nodeEnter.append('scg:title')
+        .text((d) => d.data.name);
 
       // Add labels for the nodes
       nodeEnter
@@ -133,8 +148,8 @@ export default defineComponent({
       // UPDATE
       const nodeUpdate = nodeEnter
         .merge(node)
-        .attr('fill', '#fff')
-        .attr('stroke', 'steelblue')
+        .attr('fill', '#42b883')
+        .attr('stroke', '#35495e')
         .attr('stroke-width', '3px;')
         .style('font', '12px sans-serif');
 
@@ -151,7 +166,7 @@ export default defineComponent({
       nodeUpdate
         .select('circle.node')
         .attr('r', 20)
-        .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'))
+        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'))
         .attr('cursor', 'pointer');
 
       // Remove any exiting nodes
