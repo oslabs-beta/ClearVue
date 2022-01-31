@@ -118,25 +118,28 @@ export default defineComponent({
         .on('dblclick', click);
 
       // Add Circle for the nodes
-      nodeEnter
-        .append('circle')
-        .attr('class', 'node')
-        .attr('r', 1e-6)
-        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
+      // nodeEnter
+      //   .append('circle')
+      //   .attr('class', 'node')
+      //   .attr('r', 1e-6)
+      //   .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
 
       // Add rectangle instead of circle for the nodes
-      // nodeEnter.append('rect')
-      //   .attr('class', 'node')
-      //   .attr('width', (d) => ((d.data.name.length > 30) ? 50 : 100))
-      //   .attr('height', 40)
-      //   .attr('y', -11)
-      //   .attr('rx', 2)
-      //   .attr('ry', 2)
-      //   .attr('transform', () => `translate(${source.y0},${source.x0})`)
-      //   .style('fill', (d) => (d._children ? 'lightsteelblue' : '#fff'));
+      let rectWidth = 65;
+      const rectHeight = 30;
+      nodeEnter.append('rect')
+        .attr('class', 'node')
+        .attr('width', (d) => rectWidth = (d.data.name.length > 30) ? 85 : 65)
+        .attr('height', rectHeight)
+        .attr('x', -(rectWidth / 2))
+        .attr('y', -(rectHeight / 2))
+        .attr('rx', 2)
+        .attr('ry', 2)
+        // .translate(1, 1)
+        .style('fill', (d) => (d._children ? '#42b883' : '#e3e3e3'));
 
       // Add tooltip for nodes
-      nodeEnter.append('scg:title')
+      nodeEnter.append('svg:title')
         .text((d) => d.data.name);
 
       // Add labels for the nodes
