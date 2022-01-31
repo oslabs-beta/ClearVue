@@ -16,7 +16,6 @@ import * as d3 from 'd3';
 export default defineComponent({
   name: 'Tree',
   mounted() {
-
     // 1. Access Data
 
     const treeData = {

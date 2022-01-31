@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       targetPort.postMessage({
         action,
         payload,
-      })
+      });
       break;
     default:
       console.log('default case: nonspecified action');
@@ -50,7 +50,7 @@ chrome.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener((message) => {
     const { action, payload, tabId } = message;
     console.log('Received message from connected port: ', message);
-    
+
     switch (action) {
       case 'parseTab':
         console.log('injecting parser script to tab: ', tabId);

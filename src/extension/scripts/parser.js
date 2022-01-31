@@ -39,14 +39,15 @@ const parseSubTree = (instance) => {
   // iterate through each property within the instance.subTree object, pulling out "name", "children", and "props"
   for (const property in subTreeObj) {
     // if children or dynamic children property exists, call parseChildren function to parse array of child nodes
+    // eslint-disable-next-line no-use-before-define
     if ((property === 'dynamicChildren' && Array.isArray(subTreeObj[property]) && subTreeObj[property].length !== 0)) parsedTree.children = parseChildren(subTreeObj[property]);
     // if component property exists, recursive call parseSubTree on the component property's SUBTREE
     else if (property === 'component' && subTreeObj[property]) parsedTree.components = parseSubTree(subTreeObj[property]);
   }
   // if name is not defined (for children it will be in its parser), regex the type.file
   if (!parsedTree.name) {
-    if (instance.type['__file']) parsedTree.name = setName(instance.type['__file']);
-  } else parsedTree.name = instance.type['name'];
+    if (instance.type.__file) parsedTree.name = setName(instance.type.__file);
+  } else parsedTree.name = instance.type.name;
 
   // save Vue data if component is called on instance
   if (Object.keys(instance.data).length !== 0) parsedTree.data = instance.data;
