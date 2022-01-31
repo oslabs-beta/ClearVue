@@ -26,7 +26,7 @@
             <div  id="collapseOne"
                   class="accordion-collapse collapse"
                   aria-labelledby="headingOne"
-                  data-bs-parent="#accordionEx">
+                  data-bs-parent="#accordionDisplay">
               <div class="accordion-body">
                 props from parsed data goes here
               </div>
@@ -83,4 +83,5 @@ export default defineComponent({
     min-height: 200px;
     border-style: ridge
   }
+
 </style>

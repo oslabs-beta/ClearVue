@@ -72,8 +72,10 @@ export default defineComponent({
     // append the svg object to the body of the page
     const svg = d3.select('#vert-collapse-tree');
     const g = svg
-      .attr('width', width)
-      .attr('height', height)
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '0 0 600 400')
+      // class to make it responsive
+      .classed('svg-content-responsive', true)
       .append('g')
       .attr('transform', `translate(${width / 2},100)`);
 
