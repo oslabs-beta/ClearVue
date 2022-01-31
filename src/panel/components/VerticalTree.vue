@@ -34,38 +34,38 @@ export default defineComponent({
     } else {
       treeData = {
         name: 'A',
-        size: [100, 100],
+        size: [100, 50],
         children: [
           {
             name: 'BA',
-            size: [100, 50],
+            size: [85, 50],
             children: [
-              { name: 'BAA', size: [100, 50] },
+              { name: 'BAA', size: [85, 50] },
               {
                 name: 'BAB',
-                size: [100, 50],
+                size: [85, 50],
                 children: [
-                  { name: 'BABA', size: [100, 50] },
+                  { name: 'BABA', size: [85, 50] },
                   {
                     name: 'BABB',
-                    size: [100, 50],
+                    size: [85, 50],
                     children: [
-                      { name: 'BABBA', size: [100, 50] },
+                      { name: 'BABBA', size: [85, 50] },
                     ],
                   },
-                  { name: 'BABC', size: [100, 50] },
+                  { name: 'BABC', size: [85, 50] },
                 ],
               },
-              { name: 'BAC', size: [100, 50] },
+              { name: 'BAC', size: [85, 50] },
             ],
           },
           {
             name: 'BB',
-            size: [100, 75],
+            size: [85, 50],
             children: [
-              { name: 'BBA', size: [100, 50] },
-              { name: 'BBB', size: [100, 50] },
-              { name: 'BBC', size: [100, 50] },
+              { name: 'BBA', size: [85, 50] },
+              { name: 'BBB', size: [85, 50] },
+              { name: 'BBC', size: [85, 50] },
             ],
           },
         ],

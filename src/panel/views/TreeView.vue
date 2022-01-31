@@ -1,9 +1,9 @@
 <template>
 <div class="container-fluid">
   <div class="row">
-    <div class="container-fluid">
-    </div>
+    <div class="container-fluid scrollable">
     <vertical-tree v-if="($store.state.treeData.length !== 0) || isDevMode"></vertical-tree>
+    </div>
   </div>
   <div>
     <div class="row" id="bottom-row-display">
@@ -83,5 +83,8 @@ export default defineComponent({
     min-height: 160px;
     border-style: ridge
   }
-
+  /* .scrollable {
+    overflow-x: scroll;
+    overflow-y: scroll;
+  } */
 </style>
