@@ -6,15 +6,20 @@
     <span class="navbar-toggler-icon"></span>
   </button> -->
   <a class="navbar-brand" href="#">
-    <img src="../assets/48icon.png" width="30" height="30"
+    <img src="../assets/img/48icon.png" width="30" height="30"
      class="d-inline-block align-top" alt="ClearVue Logo">
     {{ title }}
   </a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <router-link class="nav-link" to="/">Tree</router-link>
-      <router-link class="nav-link" to="/circle-pack-view">Circle Pack</router-link>
-      <router-link class="nav-link" to="/home">Other</router-link>
+      <router-link class="nav-link" to="/">
+        <img src='../assets/img/tree-icon.svg' alt='tree diagram icon'/>
+        Hierarchy
+      </router-link>
+      <router-link class="nav-link" to="/circle-pack-view">
+        <img src='../assets/img/icon-circle-pack.svg' alt='circle pack diagram icon'/>
+        Distribution
+      </router-link>
     </div>
   </div>
 </nav>
