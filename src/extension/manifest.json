@@ -33,7 +33,7 @@
       }],
     "icons": {
       "16": "assets/16icon.png",
-      "48": "assets/img/48icon.png",
+      "48": "assets/48icon.png",
       "128": "assets/128icon.png"
     }
   }
