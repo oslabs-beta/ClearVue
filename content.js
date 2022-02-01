@@ -3,11 +3,26 @@
 // the web pages the browser visits, make changes to them, and pass information to their
 // parent extension. Our content scripts set up message passing wit extension background script.
 // console.log('Hello from Content Script');
-import { getLCP, getFID, getCLS } from 'web-vitals';
+import {
+  getLCP, getFID, getCLS, getTTFB, getFCP,
+} from 'web-vitals';
 
-getCLS(console.log);
-getFID(console.log);
-getLCP(console.log);
+const metrics = {};
+
+const gatherMetrics = ({name, value}) => {
+  metrics[name] = value;
+};
+
+// send metric data to background.js
+// chrome.runtime.sendMessage({ action: 'gatherMetrics', payload })
+
+getCLS(gatherMetrics);
+getFID(gatherMetrics);
+getLCP(gatherMetrics);
+getTTFB(gatherMetrics);
+getFCP(gatherMetrics);
+console.log(metrics);
+
 // event listener for window in context of target web page (inspected window)
 // event listener waiting for a message to be passed back from 'backend/detector.js'
 window.addEventListener('message', (e) => {

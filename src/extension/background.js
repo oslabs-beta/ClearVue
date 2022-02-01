@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.onConnect.addListener((port) => {
   console.log('newly connected port: ', port);
   // tabId is used stored as port.name, used to uniquely identify each port
-  const portId = parseInt(port.name)
+  const portId = parseInt(port.name);
   ports[portId] = port;
 
   port.onMessage.addListener((message) => {

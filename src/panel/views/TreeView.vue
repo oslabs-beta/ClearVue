@@ -8,6 +8,7 @@
   <div>
     <div class="row" id="bottom-row-display">
       <div class="col gy-5">
+
         <!-- add accordions -->
         <div class="accordion" id="accordionDisplay">
           <!-- accordion item for props -->
@@ -32,6 +33,7 @@
               </div>
             </div>
           </div>
+
             <!-- accordion item for data -->
           <div class="accordion-item">
             <h2 class="accordion-header"
@@ -54,9 +56,18 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
+
+    <!-- container for performance metrics -->
+    <div class="row" id="bottom-row-display">
+      <div class="col gy-5">
+        <h1 class="text-light">performance</h1>
+      </div>
+    </div>
+
   </div>
 </div>
 </template>
