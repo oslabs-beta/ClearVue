@@ -31,6 +31,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     case 'updateTree':
       targetPort = ports[tab.id];
       console.log('sending tree data to port: ', targetPort);
+
+      targetPort.postMessage({
+        action,
+        payload,
+      });
+      break;
+    case 'getVitals':
+      targetPort = ports[tab.id];
+      console.log('sending web vitals data to port: ', targetPort);
+
       targetPort.postMessage({
         action,
         payload,
@@ -55,7 +65,7 @@ chrome.runtime.onConnect.addListener((port) => {
     switch (action) {
       case 'parseTab':
         console.log('injecting parser script to tab: ', tabId);
-        // chrome.tabs.sendMessage(tabId, { tabId, action });
+
         chrome.scripting.executeScript({
           target: { tabId },
           function: () => {

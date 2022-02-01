@@ -4,6 +4,7 @@ export default createStore({
   state: {
     tabId: 0,
     port: {},
+    webVitals: {},
     treeData: [],
     testData: {},
     activeData: { sample: 'data' },
@@ -17,6 +18,9 @@ export default createStore({
     },
     initPort(state, port) {
       state.port = port;
+    },
+    updateVitals(state, newVitals) {
+      state.webVitals = newVitals;
     },
     updateTree(state, payload) {
       state.treeData = JSON.parse(payload);

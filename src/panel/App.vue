@@ -27,6 +27,9 @@ export default defineComponent({
           case 'updateTree':
             this.$store.commit('updateTree', payload);
             break;
+          case 'getVitals':
+            this.$store.commit('updateVitals', payload);
+            break;
           default:
             console.log('received unspecified action on port: ');
         }
@@ -34,6 +37,12 @@ export default defineComponent({
 
       port.postMessage({
         action: 'parseTab',
+        tabId,
+        message: 'extension dispatch action to parse target tab',
+      });
+
+      port.postMessage({
+        action: 'getVitals',
         tabId,
         message: 'extension dispatch action to parse target tab',
       });

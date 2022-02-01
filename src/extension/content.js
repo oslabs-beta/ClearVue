@@ -6,6 +6,9 @@
 
 // event listener for window in context of target web page (inspected window)
 // event listener waiting for a message to be passed back from 'backend/detector.js'
+
+const webVitals = {};
+
 window.addEventListener('message', (e) => {
   if (e.data.type === 'clearVue') {
     console.log('received clearVue message on content script listener: ', e);
@@ -18,6 +21,15 @@ window.addEventListener('message', (e) => {
 // event listener for messages from extension background
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('Received message from background: ', message);
+  const { tabId, action } = message;
+
+  switch (action) {
+    case 'getVitals':
+      chrome.runtime.sendMessage({ tabId, action, webVitals });
+      break;
+    default:
+      console.log('unsupported action received on content script');
+  }
 });
 
 chrome.runtime.sendMessage({ action: 'detectVue' });
