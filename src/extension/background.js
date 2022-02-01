@@ -11,6 +11,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('From sender: ', sender.tab);
   const { action, payload } = message;
   const { tab } = sender;
+  let targetPort;
 
   switch (action) {
     case 'detectVue':
@@ -28,12 +29,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
       break;
     case 'updateTree':
-      const targetPort = ports[tab.id];
+      targetPort = ports[tab.id];
       console.log('sending tree data to port: ', targetPort);
       targetPort.postMessage({
         action,
         payload,
-      })
+      });
       break;
     default:
       console.log('default case: nonspecified action');
@@ -44,13 +45,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.onConnect.addListener((port) => {
   console.log('newly connected port: ', port);
   // tabId is used stored as port.name, used to uniquely identify each port
-  const portId = parseInt(port.name)
+  const portId = parseInt(port.name, 10);
   ports[portId] = port;
 
   port.onMessage.addListener((message) => {
     const { action, payload, tabId } = message;
     console.log('Received message from connected port: ', message);
-    
+
     switch (action) {
       case 'parseTab':
         console.log('injecting parser script to tab: ', tabId);
@@ -65,6 +66,9 @@ chrome.runtime.onConnect.addListener((port) => {
             }
           },
         });
+        break;
+      case 'getVitals':
+        chrome.tabs.sendMessage(tabId, { tabId, action });
         break;
       default:
         console.log('default case: nonspecified action');
