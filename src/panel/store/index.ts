@@ -35,7 +35,31 @@ export default createStore({
   getters: {
     getChartData(state) {
       const deepCopy = (data: any) => JSON.parse(JSON.stringify(data));
+      const roughSizeOfObject = (object: any) : number => {
+        const objectList = [];
+        const stack = [object];
+        let bytes = 0;
 
+        while (stack.length) {
+          const value = stack.pop();
+
+          if (typeof value === 'boolean') {
+            bytes += 4;
+          } else if (typeof value === 'string') {
+            bytes += value.length * 2;
+          } else if (typeof value === 'number') {
+            bytes += 8;
+          } else if
+          (
+            typeof value === 'object'
+                && objectList.indexOf(value) === -1
+          ) {
+            objectList.push(value);
+            stack.push(...Object.values(value));
+          }
+        }
+        return bytes;
+      };
       const processTree = (tree: any) => {
         if (!tree) {
           return undefined;
@@ -50,13 +74,16 @@ export default createStore({
           data,
           children: [],
           size: [100, 100],
+          value: 0,
         };
 
         if (typeof props === 'object') {
           node.props = deepCopy(props);
+          node.value += roughSizeOfObject(node.props);
         }
         if (typeof data === 'object') {
           node.data = deepCopy(data);
+          node.value += roughSizeOfObject(node.data);
         }
 
         if (components) {
