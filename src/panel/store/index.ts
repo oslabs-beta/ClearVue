@@ -6,6 +6,8 @@ export default createStore({
     port: {},
     treeData: [],
     testData: {},
+    activeData: { sample: 'data' },
+    activeProps: { sample: 'prop' },
   },
   mutations: {
     initTab(state) {
@@ -19,6 +21,12 @@ export default createStore({
     updateTree(state, payload) {
       state.treeData = JSON.parse(payload);
       console.log('vuex treeData updated: ', state.treeData);
+    },
+    updateActiveData(state, newData) {
+      state.activeData = newData;
+    },
+    updateActiveProps(state, newProps) {
+      state.activeProps = newProps;
     },
     testLog(state, str) {
       console.log('mutation invoked: ', str);

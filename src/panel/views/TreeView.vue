@@ -28,7 +28,7 @@
                   aria-labelledby="headingOne"
                   data-bs-parent="#accordionDisplay">
               <div class="accordion-body">
-                props from parsed data goes here
+                {{ activeProps }}
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
                   aria-labelledby="headingTwo"
                   data-bs-parent="#accordionEx">
               <div class="accordion-body">
-                other data from selected node goes here
+                {{ activeData }}
               </div>
             </div>
           </div>
@@ -71,6 +71,12 @@ export default defineComponent({
     VerticalTree,
   },
   computed: {
+    activeData() {
+      return this.$store.state.activeData;
+    },
+    activeProps() {
+      return this.$store.state.activeProps;
+    },
     isDevMode() {
       return this.$store.getters.isDevMode;
     },
