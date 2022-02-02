@@ -2,8 +2,6 @@
   <div class='svg-container'>
     <svg id='vert-collapse-tree'></svg>
   </div>
-  <div>{{ getChartData }}</div>
-  <div>{{ treeData }}</div>
 </template>
 
 <script>

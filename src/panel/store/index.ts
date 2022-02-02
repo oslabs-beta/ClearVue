@@ -65,10 +65,6 @@ export default createStore({
         return bytes;
       };
       const processTree = (tree: any) => {
-        if (!tree) {
-          return undefined;
-        }
-
         const {
           name, props, data, children, components,
         } = tree;
@@ -94,8 +90,8 @@ export default createStore({
           (node.children as any[]).push(processTree(components));
         } else if (children) {
           if (Array.isArray(children)) {
-            for (let i = 0; i <= children.length; i++) {
-              if (children[i]) {
+            for (let i = 0; i < children.length; i++) {
+              if (Object.keys(children[i]).length) {
                 (node.children as any[]).push(processTree(children[i]));
               }
             }
