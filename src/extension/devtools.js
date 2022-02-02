@@ -8,5 +8,4 @@
 // runtime APIs that a content script has access to. Like a content script, a
 // DevTools page can communicate with the background page using Message Passing.
 
-chrome.devtools.panels.create('Vue Toolkit', null, '/dist/index.html');
-chrome.storage.sync.set({ vueDetected: true });
+chrome.devtools.panels.create('ClearVue', null, '/dist/index.html');
