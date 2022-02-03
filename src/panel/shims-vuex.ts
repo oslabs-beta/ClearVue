@@ -5,7 +5,9 @@ import { Store } from 'vuex';
 declare module '@vue/runtime-core' {
   // Declare your own store states.
   interface State {
-    tabId: number
+    tabId: number,
+    activeData: any,
+    activeProps: any,
   }
 
   interface ComponentCustomProperties {

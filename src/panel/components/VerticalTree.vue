@@ -2,8 +2,6 @@
   <div class='svg-container'>
     <svg id='vert-collapse-tree'></svg>
   </div>
-  <div>{{ getChartData }}</div>
-  <div>{{ treeData }}</div>
 </template>
 
 <script>
@@ -137,7 +135,7 @@ export default defineComponent({
       const rectHeight = 30;
       nodeEnter.append('rect')
         .attr('class', 'node')
-        .attr('width', (d) => rectWidth = (d.data.name.length > 6) ? 85 : 65)
+        .attr('width', (d) => rectWidth = (d.data.name.length > 10) ? 85 : 65)
         .attr('height', rectHeight)
         .attr('x', -(rectWidth / 2))
         .attr('y', -(rectHeight / 2))
