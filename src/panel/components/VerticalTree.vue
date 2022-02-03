@@ -2,8 +2,6 @@
   <div class='svg-container'>
     <svg id='vert-collapse-tree'></svg>
   </div>
-  <div>{{ getChartData }}</div>
-  <div>{{ treeData }}</div>
 </template>
 
 <script>
@@ -31,6 +29,7 @@ export default defineComponent({
     // populate treeData based on current mode
     if (process.env.NODE_ENV === 'production') {
       treeData = this.getChartData;
+      console.log('treeData is -->', treeData);
     } else {
       treeData = {
         name: 'A',
@@ -137,7 +136,7 @@ export default defineComponent({
       const rectHeight = 30;
       nodeEnter.append('rect')
         .attr('class', 'node')
-        .attr('width', (d) => rectWidth = (d.data.name.length > 6) ? 85 : 65)
+        .attr('width', (d) => rectWidth = (d.data.name.length > 10) ? 85 : 65)
         .attr('height', rectHeight)
         .attr('x', -(rectWidth / 2))
         .attr('y', -(rectHeight / 2))
@@ -278,3 +277,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+</style>
