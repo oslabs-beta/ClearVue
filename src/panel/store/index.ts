@@ -65,6 +65,7 @@ export default createStore({
         return bytes;
       };
       const processTree = (tree: any) => {
+        if (tree === undefined || tree === null) return {};
         const {
           name, props, data, children, components,
         } = tree;
@@ -79,26 +80,30 @@ export default createStore({
 
         if (node.name === undefined) node.name = 'Component';
 
-        if (typeof props === 'object') {
-          node.props = deepCopy(props);
-          node.value += roughSizeOfObject(node.props);
-        }
-        if (typeof data === 'object') {
-          node.data = deepCopy(data);
-          node.value += roughSizeOfObject(node.data);
-        }
+        // if (typeof props === 'object') {
+        //   node.props = deepCopy(props);
+        //   node.value += roughSizeOfObject(node.props);
+        // }
+        // if (typeof data === 'object') {
+        //   node.data = deepCopy(data);
+        //   node.value += roughSizeOfObject(node.data);
+        // }
 
         if (components) {
           (node.children as any[]).push(processTree(components));
         } else if (children) {
+          console.log('children found! -->', children);
           if (Array.isArray(children)) {
             for (let i = 0; i < children.length; i++) {
               if (Object.keys(children[i]).length) {
                 (node.children as any[]).push(processTree(children[i]));
               }
             }
-          } else if (children.components) {
-            (node.children as any[]).push(processTree(children.components));
+          } else if (typeof (children) === 'object' && Object.keys(children).length) {
+            (node.children as any[]).push(processTree(children));
+            if (children.components) {
+              (node.children as any[]).push(processTree(children.components));
+            }
           }
         }
 

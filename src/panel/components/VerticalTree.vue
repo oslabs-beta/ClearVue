@@ -29,6 +29,7 @@ export default defineComponent({
     // populate treeData based on current mode
     if (process.env.NODE_ENV === 'production') {
       treeData = this.getChartData;
+      console.log('treeData is -->', treeData);
     } else {
       treeData = {
         name: 'A',
