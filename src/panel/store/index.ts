@@ -73,9 +73,11 @@ export default createStore({
           props,
           data,
           children: [],
-          size: [100, 100],
+          size: [100, 50],
           value: 0,
         };
+
+        if (node.name === undefined) node.name = 'Component';
 
         if (typeof props === 'object') {
           node.props = deepCopy(props);
