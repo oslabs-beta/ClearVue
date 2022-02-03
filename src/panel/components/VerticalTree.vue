@@ -277,3 +277,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+</style>
