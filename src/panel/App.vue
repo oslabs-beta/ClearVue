@@ -28,6 +28,7 @@ export default defineComponent({
             this.$store.commit('updateTree', payload);
             break;
           case 'getVitals':
+            console.log('got vitals data:', JSON.parse(payload));
             this.$store.commit('updateVitals', payload);
             break;
           default:
