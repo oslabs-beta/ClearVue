@@ -4,7 +4,13 @@ export default createStore({
   state: {
     tabId: 0,
     port: {},
-    webVitals: {},
+    webVitals: {
+      CLS: 0,
+      FID: 0,
+      LCP: 0,
+      TTFB: 0,
+      FCP: 0,
+    },
     treeData: [],
     testData: {},
     activeData: { sample: 'data' },
@@ -20,7 +26,7 @@ export default createStore({
       state.port = port;
     },
     updateVitals(state, newVitals) {
-      state.webVitals = newVitals;
+      state.webVitals = JSON.parse(newVitals);
     },
     updateTree(state, payload) {
       state.treeData = JSON.parse(payload);

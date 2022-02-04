@@ -10,7 +10,13 @@ import {
   getLCP, getFID, getCLS, getTTFB, getFCP,
 } from 'web-vitals';
 
-const metrics = {};
+const metrics = {
+  CLS: 0,
+  FID: 0,
+  LCP: 0,
+  TTFB: 0,
+  FCP: 0,
+};
 
 const gatherMetrics = ({ name, value }) => {
   metrics[name] = value;
