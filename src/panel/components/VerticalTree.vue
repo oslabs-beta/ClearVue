@@ -103,7 +103,7 @@ export default defineComponent({
         d.children = null;
       }
     }
-    function update(source) {
+    const update = (source) => {
       // Assigns the x and y position for the nodes
       const treeData = flexLayout(root);
 
@@ -122,7 +122,8 @@ export default defineComponent({
         .append('g')
         .attr('class', 'node')
         .attr('transform', (d) => `translate(${source.x0},${source.y0})`)
-        .on('dblclick', click);
+        .on('click', click)
+        .on('dblclick', dbClick);
 
       // Add Circle for the nodes
       // nodeEnter
@@ -260,8 +261,27 @@ export default defineComponent({
         return path;
       }
 
-      // Toggle children on click.
+      // update activeData (and display it) on click
       function click(event, d) {
+        console.log('node has been clicked!', d.data);
+        console.log('d.props is --> ', d.data.props);
+
+        if (typeof d.data.props === 'object') {
+          newActiveProps(JSON.parse(JSON.stringify(d.data.props)));
+        } else if (d.props) newActiveProps(d.data.props);
+        if (d.data.data) newActiveData(d.data.data);
+      }
+
+      // update active props
+      const newActiveProps = (props) => {
+        this.$store.commit('updateActiveProps', props);
+      };
+      // update active data
+      const newActiveData = (data) => {
+        this.$store.commit('updateActiveData', data);
+      };
+      // Toggle children on click.
+      function dbClick(event, d) {
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -271,7 +291,7 @@ export default defineComponent({
         }
         update(d);
       }
-    }
+    };
     // eslint-disable-next-line no-use-before-define
     update(root);
   },
