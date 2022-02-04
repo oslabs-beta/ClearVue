@@ -43,10 +43,6 @@
     </tr>
   </tbody>
 </table>
-    </div>
-    {{ metrics }}
-    {{ getVitals.CLS }}
-  </div>
 </template>
 
 <script lang="ts">
@@ -57,9 +53,6 @@ export default defineComponent({
   computed: {
     metrics() {
       return this.$store.state.webVitals;
-    },
-    getVitals() {
-      return this.$store.getters.getVitals;
     },
   },
 });

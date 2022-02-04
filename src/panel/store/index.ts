@@ -26,7 +26,7 @@ export default createStore({
       state.port = port;
     },
     updateVitals(state, newVitals) {
-      state.webVitals = newVitals;
+      state.webVitals = JSON.parse(newVitals);
     },
     updateTree(state, payload) {
       state.treeData = JSON.parse(payload);
@@ -123,9 +123,6 @@ export default createStore({
         return false;
       }
       return true;
-    },
-    getVitals(state) {
-      return state.webVitals;
     },
   },
   actions: {},
