@@ -48,11 +48,11 @@
       <div class='accordion-item bg-dark'>
         <h2 class='accordion-header' id='headingOne'>
           <button
-            class='accordion-button bg-dark text-light'
+            class='accordion-button bg-dark text-light collapsed'
             type='button'
             data-bs-toggle='collapse'
             data-bs-target='#collapseOne'
-            aria-expanded='true'
+            aria-expanded='false'
             aria-controls='collapseOne'
           >
             Cumulative Layout Shift (CLS)
@@ -60,7 +60,7 @@
         </h2>
         <div
           id='collapseOne'
-          class='accordion-collapse collapse show'
+          class='accordion-collapse collapse'
           aria-labelledby='headingOne'
           data-bs-parent='#accordionExample'
         >
@@ -121,6 +121,58 @@
             The Largest Contentful Paint (LCP) metric reports the render time of the largest image
             or text block visible within the viewport, relative to when the page first started
             loading.
+          </div>
+        </div>
+      </div>
+      <div class='accordion-item bg-dark'>
+        <h2 class='accordion-header' id='headingFour'>
+          <button
+            class='accordion-button bg-dark text-light collapsed'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#collapseFour'
+            aria-expanded='false'
+            aria-controls='collapseFour'
+          >
+            Time to First Byte (TTFB)
+          </button>
+        </h2>
+        <div
+          id='collapseFour'
+          class='accordion-collapse collapse'
+          aria-labelledby='headingFour'
+          data-bs-parent='#accordionExample'
+        >
+          <div class='accordion-body text-light'>
+            The Time to First Byte (TTFB) measures the time between the request for a resource and
+            when the first byte of a response begins to arrive. It helps identify when a web server
+            is running too slow to respond to requests.
+          </div>
+        </div>
+      </div>
+      <div class='accordion-item bg-dark'>
+        <h2 class='accordion-header' id='headingFive'>
+          <button
+            class='accordion-button bg-dark text-light collapsed'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#collapseFive'
+            aria-expanded='false'
+            aria-controls='collapseFive'
+          >
+            First Input Delay (FID)
+          </button>
+        </h2>
+        <div
+          id='collapseFive'
+          class='accordion-collapse collapse'
+          aria-labelledby='headingFive'
+          data-bs-parent='#accordionExample'
+        >
+          <div class='accordion-body text-light'>
+            First Input Delay (FID) measures the time when a user first interacts with the page
+            (when they click or hit a button) to the time when the browser is actually able to first
+            begin processing event handlers in response to that interaction.
           </div>
         </div>
       </div>
