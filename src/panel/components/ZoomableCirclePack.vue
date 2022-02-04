@@ -23,10 +23,10 @@ export default {
   mounted() {
     console.log('flareData is -->', flareData.default);
     console.log('flareData: ', flareData);
-    let chartData = flareData.default;
-    if (process.env.NODE_ENV === 'production') {
-      chartData = this.getChartData;
-    }
+    const chartData = flareData.default;
+    // if (process.env.NODE_ENV === 'production') {
+    //   chartData = this.getChartData;
+    // }
     const pack = (chartData) => d3.pack()
       .size([width, height])
       .padding(3)(d3.hierarchy(chartData)
