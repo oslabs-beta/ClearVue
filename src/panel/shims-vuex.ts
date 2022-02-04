@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
     tabId: number,
     activeData: any,
     activeProps: any,
+    webVitals: any,
   }
 
   interface ComponentCustomProperties {

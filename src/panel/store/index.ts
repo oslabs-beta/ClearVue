@@ -4,7 +4,13 @@ export default createStore({
   state: {
     tabId: 0,
     port: {},
-    webVitals: {},
+    webVitals: {
+      CLS: 0,
+      FID: 0,
+      LCP: 0,
+      TTFB: 0,
+      FCP: 0,
+    },
     treeData: [],
     testData: {},
     activeData: { sample: 'data' },
@@ -117,6 +123,9 @@ export default createStore({
         return false;
       }
       return true;
+    },
+    getVitals(state) {
+      return state.webVitals;
     },
   },
   actions: {},
