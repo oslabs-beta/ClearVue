@@ -21,7 +21,7 @@
         Composition
       </router-link>
         <router-link class="nav-link" to="/metrics">
-        <img src='../assets/img/icon-circle-pack.svg' alt='circle pack diagram icon'/>
+        <img src='../assets/img/multiline_chart_white_24dp.svg' alt='circle pack diagram icon'/>
         Metrics
       </router-link>
     </div>
