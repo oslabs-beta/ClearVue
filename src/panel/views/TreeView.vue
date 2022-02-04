@@ -9,12 +9,12 @@
     <div class="row" id="bottom-row-display">
       <div class="col gy-4">
         <!-- add accordions -->
-        <div class="accordion" id="accordionDisplay">
+        <div class="accordion bg-dark" id="accordionDisplay">
           <!-- accordion item for props -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-dark">
             <h2 class="accordion-header"
                 id="headingOne">
-              <button class="accordion-button collapsed"
+              <button class="accordion-button bg-dark text-light collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
@@ -24,7 +24,7 @@
               </button>
             </h2>
             <div  id="collapseOne"
-                  class="accordion-collapse collapse"
+                  class="accordion-collapse text-light collapse"
                   aria-labelledby="headingOne"
                   data-bs-parent="#accordionDisplay">
               <div class="accordion-body">
@@ -33,10 +33,10 @@
             </div>
           </div>
             <!-- accordion item for data -->
-          <div class="accordion-item">
+          <div class="accordion-item bg-dark">
             <h2 class="accordion-header"
                 id="headingTwo">
-              <button class="accordion-button collapsed"
+              <button class="accordion-button bg-dark text-light collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo"
@@ -46,7 +46,7 @@
               </button>
             </h2>
             <div  id="collapseTwo"
-                  class="accordion-collapse collapse"
+                  class="accordion-collapse text-light collapse"
                   aria-labelledby="headingTwo"
                   data-bs-parent="#accordionEx">
               <div class="accordion-body">
@@ -87,7 +87,8 @@ export default defineComponent({
 <style>
   #bottom-row-display {
     min-height: 160px;
-    border-style: ridge
+    border-style: ridge;
+    border-color: LightSlateGray;
   }
   /* .scrollable {
     overflow-x: scroll;
