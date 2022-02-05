@@ -4,7 +4,13 @@ export default createStore({
   state: {
     tabId: 0,
     port: {},
-    webVitals: {},
+    webVitals: {
+      CLS: 0,
+      FID: 0,
+      LCP: 0,
+      TTFB: 0,
+      FCP: 0,
+    },
     treeData: [],
     testData: {},
     activeData: { sample: 'data' },
@@ -20,7 +26,7 @@ export default createStore({
       state.port = port;
     },
     updateVitals(state, newVitals) {
-      state.webVitals = newVitals;
+      state.webVitals = JSON.parse(newVitals);
     },
     updateTree(state, payload) {
       state.treeData = JSON.parse(payload);
@@ -65,10 +71,7 @@ export default createStore({
         return bytes;
       };
       const processTree = (tree: any) => {
-        if (!tree) {
-          return undefined;
-        }
-
+        if (tree === undefined || tree === null) return {};
         const {
           name, props, data, children, components,
         } = tree;
@@ -77,30 +80,36 @@ export default createStore({
           props,
           data,
           children: [],
-          size: [100, 100],
+          size: [100, 50],
           value: 0,
         };
 
-        if (typeof props === 'object') {
-          node.props = deepCopy(props);
-          node.value += roughSizeOfObject(node.props);
-        }
-        if (typeof data === 'object') {
-          node.data = deepCopy(data);
-          node.value += roughSizeOfObject(node.data);
-        }
+        if (node.name === undefined) node.name = 'Component';
+
+        // if (typeof props === 'object') {
+        //   node.props = deepCopy(props);
+        //   node.value += roughSizeOfObject(node.props);
+        // }
+        // if (typeof data === 'object') {
+        //   node.data = deepCopy(data);
+        //   node.value += roughSizeOfObject(node.data);
+        // }
 
         if (components) {
           (node.children as any[]).push(processTree(components));
         } else if (children) {
+          console.log('children found! -->', children);
           if (Array.isArray(children)) {
-            for (let i = 0; i <= children.length; i++) {
-              if (children[i]) {
+            for (let i = 0; i < children.length; i++) {
+              if (Object.keys(children[i]).length) {
                 (node.children as any[]).push(processTree(children[i]));
               }
             }
-          } else if (children.components) {
-            (node.children as any[]).push(processTree(children.components));
+          } else if (typeof (children) === 'object' && Object.keys(children).length) {
+            (node.children as any[]).push(processTree(children));
+            if (children.components) {
+              (node.children as any[]).push(processTree(children.components));
+            }
           }
         }
 

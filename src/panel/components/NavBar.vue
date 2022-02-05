@@ -18,7 +18,11 @@
       </router-link>
       <router-link class="nav-link" to="/circle-pack-view">
         <img src='../assets/img/icon-circle-pack.svg' alt='circle pack diagram icon'/>
-        Distribution
+        Composition
+      </router-link>
+        <router-link class="nav-link" to="/metrics">
+        <img src='../assets/img/icon-circle-pack.svg' alt='circle pack diagram icon'/>
+        Metrics
       </router-link>
     </div>
   </div>

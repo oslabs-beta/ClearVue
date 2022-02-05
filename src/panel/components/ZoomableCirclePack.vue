@@ -15,11 +15,21 @@ import * as d3 from 'd3';
 import * as flareData from '../assets/flare-2.json';
 
 export default {
+  computed: {
+    getChartData() {
+      return this.$store.getters.getChartData;
+    },
+  },
   mounted() {
     console.log('flareData is -->', flareData.default);
-    const pack = (flareData) => d3.pack()
+    console.log('flareData: ', flareData);
+    const chartData = flareData.default;
+    // if (process.env.NODE_ENV === 'production') {
+    //   chartData = this.getChartData;
+    // }
+    const pack = (chartData) => d3.pack()
       .size([width, height])
-      .padding(3)(d3.hierarchy(flareData)
+      .padding(3)(d3.hierarchy(chartData)
         .sum((d) => d.value)
         .sort((a, b) => b.value - a.value));
 
@@ -32,7 +42,7 @@ export default {
       .interpolate(d3.interpolateHcl);
 
     const createChart = () => {
-      const root = pack(flareData.default);
+      const root = pack(chartData);
       let focus = root;
       let view;
 
@@ -55,7 +65,7 @@ export default {
         .on('click', (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
       const label = svg.append('g')
-        .style('font', '10px sans-serif')
+        .style('font', '20px sans-serif')
         .attr('pointer-events', 'none')
         .attr('text-anchor', 'middle')
         .selectAll('text')
