@@ -2,7 +2,7 @@
   <svg id="zoom-circle-pack"></svg>
 </template>
 
-<script>
+<script lang="ts">
 /**
  * See --> https://observablehq.com/@d3/zoomable-circle-packing
  * Also, FYI, Observable vs JavaScript --> https://observablehq.com/@observablehq/observables-not-javascript

@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ZoomableCirclePack from '../components/ZoomableCirclePack.vue';
 
 export default {

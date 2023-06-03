@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 /* eslint no-underscore-dangle: ["error", { "allow": ["_children"] }] */
 /* eslint no-use-before-define: ["error", { "functions": false }] */
 /* eslint-disable no-mixed-operators */
@@ -16,7 +16,6 @@ import * as d3 from 'd3';
 export default defineComponent({
   name: 'Tree',
   mounted() {
-
     // 1. Access Data
 
     const treeData = {

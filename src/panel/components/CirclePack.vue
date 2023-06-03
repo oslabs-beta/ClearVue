@@ -2,7 +2,7 @@
   <svg id="circle-pack"></svg>
 </template>
 
-<script>
+<script lang="ts">
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 /* eslint-disable no-undef */

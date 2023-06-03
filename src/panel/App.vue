@@ -2,7 +2,7 @@
   <nav-bar title="ClearVue"></nav-bar>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import NavBar from './components/NavBar.vue';
 
