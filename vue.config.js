@@ -1,6 +1,4 @@
-const path = require('path');
+import { resolve } from 'path';
 
-module.exports = {
-  publicPath: './',
-  outputDir: path.resolve(__dirname, './src/extension/dist'),
-};
+export const publicPath = './';
+export const outputDir = resolve(__dirname, './src/extension/dist');
