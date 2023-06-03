@@ -15,5 +15,5 @@ port.onMessage.addListener((msg) => {
   console.log('port received msg:', msg);
   const received = document.createElement('div');
   received.innerHTML = msg.data;
-  document.getElementsByTagName('BODY')[0].appendChild(received);
+  document.getElementsByTagName('BODY')[0]!.appendChild(received);
 });

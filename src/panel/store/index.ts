@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 
+// TODO: create interface for Store
 export default createStore({
   state: {
     tabId: 0,

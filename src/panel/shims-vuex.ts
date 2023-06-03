@@ -1,9 +1,8 @@
-/* eslint-disable */
-import { ComponentCustomProperties } from 'vue';
 import { Store } from 'vuex';
 
 declare module '@vue/runtime-core' {
   // Declare your own store states.
+  // TODO: add more specific types for state
   interface State {
     tabId: number,
     activeData: any,

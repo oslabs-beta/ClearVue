@@ -4,6 +4,7 @@
 // console.log('Hello from Detector Script');
 
 function detectVue(win) {
+  // eslint-disable-next-line no-underscore-dangle
   const vueDetected = !!window.__VUE__;
   if (vueDetected) {
     console.log('Vue3 detected: ', vueDetected);
